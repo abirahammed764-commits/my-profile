@@ -3,113 +3,115 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>ABIR AHAMMAD</title>
+<title>Abir Ahammad</title>
 <style>
-    * { margin: 0; padding: 0; box-sizing: border-box; }
-  body {
-    background: #000;
-    color: #FF1493;
-    font-family: 'Courier New', monospace;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    min-height: 100vh;
-    overflow: hidden;
-  }
+* { margin: 0; padding: 0; box-sizing: border-box; }
 
-  canvas { position: fixed; top: 0; left: 0; z-index: -1; }
-
- .container {
-    text-align: center;
-    border: 2px solid #FF1493;
-    padding: 40px 30px;
-    border-radius: 15px;
-    box-shadow: 0 0 25px rgba(255, 20, 147, 0.7);
-    background: rgba(0, 0, 0, 0.8);
-    backdrop-filter: blur(5px);
-    z-index: 1;
-  }
-
-  h1 {
-    font-size: 2.5em;
-    color: #FF1493;
-    text-shadow: 0 0 10px #FF1493, 0 0 20px #FF1493;
-    margin-bottom: 30px;
-    animation: glow 2s infinite alternate;
-  }
-
-  @keyframes glow {
-    from { text-shadow: 0 0 10px #FF1493; }
-    to { text-shadow: 0 0 20px #FF1493, 0 0 30px #FF1493; }
-  }
-
- .link-btn {
-    display: block;
-    width: 250px;
-    margin: 15px auto;
-    padding: 12px;
-    background: transparent;
-    border: 2px solid #FF1493;
-    color: #FF1493;
-    text-decoration: none;
-    border-radius: 8px;
-    font-weight: bold;
-    transition: 0.3s;
-  }
-
- .link-btn:hover {
-    background: #FF1493;
-    color: #000;
-    box-shadow: 0 0 20px #FF1493;
-    transform: scale(1.05);
-  }
-</style>
-</head>
-<body>
-  <canvas id="matrix"></canvas>
-  <div class="container">
-    <h1>ABIR AHAMMAD</h1>
-    <a href="https://instagram.com/abir_x_stone" class="link-btn">Instagram: @abir_x_stone</a>
-    <a href="https://wa.me/" class="link-btn">WhatsApp: Message Me</a>
-    <a href="https://t.me/Abir0N3" class="link-btn">Telegram: @Abir0N3</a>
-    <a href="mailto:abirahammed764@gmail.com" class="link-btn">Email: abirahammed764@gmail.com</a>
-  </div>
-
-<script>
-// Hot Pink Matrix Rain
-const canvas = document.getElementById('matrix');
-const ctx = canvas.getContext('2d');
-canvas.width = window.innerWidth;
-canvas.height = window.innerHeight;
-
-const letters = "01ABCDEFGHIJKLMNOPQRSTUVWXYZ";
-const fontSize = 14;
-const columns = canvas.width / fontSize;
-const drops = [];
-
-for(let x = 0; x < columns; x++) drops[x] = 1;
-
-function draw() {
-  ctx.fillStyle = "rgba(0, 0, 0, 0.05)";
-  ctx.fillRect(0, 0, canvas.width, canvas.height);
-
-  ctx.fillStyle = "#FF1493";
-  ctx.font = fontSize + "px monospace";
-
-  for(let i = 0; i < drops.length; i++) {
-    const text = letters[Math.floor(Math.random() * letters.length)];
-    ctx.fillText(text, i * fontSize, drops[i] * fontSize);
-
-    if(drops[i] * fontSize > canvas.height && Math.random() > 0.975)
-      drops[i] = 0;
-
-    drops[i]++;
-  }
+:root {
+    --bg: #000;
+    --text: #fff;
+    --card-bg: rgba(0, 20, 10, 0.55);
+    --card-border: rgba(0, 255, 136, 0.35);
+    --accent: #00ff88;
+    --muted: rgba(255, 255, 255, 0.5);
+    --btn-bg: rgba(255, 255, 255, 0.03);
 }
-setInterval(draw, 33);
-</script>
-</body>
-</html>
+
+body.light {
+    --bg: #f2f5f3;
+    --text: #10201a;
+    --card-bg: rgba(255, 255, 255, 0.75);
+    --card-border: rgba(0, 150, 90, 0.35);
+    --accent: #00a862;
+    --muted: rgba(20, 40, 30, 0.6);
+    --btn-bg: rgba(0, 0, 0, 0.03);
+}
+
+body {
+    font-family: 'Poppins', sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    min-height: 100vh;
+    overflow-x: hidden;
+    transition: background 0.4s ease, color 0.4s ease;
+}
+
+#matrix-canvas {
+    position: fixed;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    z-index: 0;
+    opacity: 0.35;
+}
+
+.container {
+    position: relative;
+    z-index: 1;
+    max-width: 420px;
+    margin: 0 auto;
+    padding: 15px;
+}
+
+::-webkit-scrollbar { width: 6px; }
+::-webkit-scrollbar-track { background: rgba(0, 0, 0, 0.3); }
+::-webkit-scrollbar-thumb { background: rgba(0, 255, 136, 0.3); border-radius: 3px; }
+
+.mode-toggle {
+    position: fixed;
+    top: 16px;
+    right: 16px;
+    z-index: 5;
+    width: 42px;
+    height: 42px;
+    border-radius: 50%;
+    background: var(--card-bg);
+    border: 1px solid var(--card-border);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 18px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+.mode-toggle:active { transform: scale(0.9); }
+
+.profile-card {
+    margin-top: 60px;
+    background: var(--card-bg);
+    border: 1px solid var(--card-border);
+    border-radius: 18px;
+    padding: 35px 25px;
+    text-align: center;
+    backdrop-filter: blur(6px);
+    box-shadow: 0 0 25px rgba(0, 255, 136, 0.15);
+    transition: background 0.4s ease, border 0.4s ease;
+}
+
+.avatar {
+    width: 100px;
+    height: 100px;
+    margin: 0 auto 18px;
+    border-radius: 50%;
+    overflow: hidden;
+    border: 2px solid var(--accent);
+    box-shadow: 0 0 20px rgba(0, 255, 136, 0.5);
+}
+.avatar img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+}
+
+.profile-name {
+    font-size: 22px;
+    font-weight: 700;
+    letter-spacing: 1px;
+    color: var(--accent);
+    text-shadow: 0 0 10px rgba(0, 255, 136, 0.5);
+    margin-bottom: 6px;
+}
+
 .profile-tag {
     font-size: 13px;
     color: var(--muted);
